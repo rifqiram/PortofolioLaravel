@@ -4,27 +4,29 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| WEB ROUTES
 |--------------------------------------------------------------------------
-| Route paling aman untuk testing Laravel di Vercel
-| JANGAN pakai auth dulu
+| /        -> UI (Blade)
+| /health  -> Health check (JSON)
+|--------------------------------------------------------------------------
 */
 
+// UI PORTFOLIO (LOCALHOST & PROD)
 Route::get('/', function () {
+    return view('welcome'); // welcome.blade.php
+});
+
+// Health check (AMAN UNTUK VERCEL)
+Route::get('/health', function () {
     return response()->json([
-        'status' => 'OK',
-        'message' => 'Laravel berhasil jalan di Vercel 🚀',
+        'status'      => 'OK',
+        'message'     => 'Laravel API aktif 🚀',
         'php_version' => PHP_VERSION,
-        'env' => app()->environment()
+        'env'         => app()->environment(),
     ]);
 });
 
-/*
-|--------------------------------------------------------------------------
-| Route tambahan (opsional)
-|--------------------------------------------------------------------------
-*/
-
+// Test route
 Route::get('/test', function () {
     return 'Test route OK';
 });
